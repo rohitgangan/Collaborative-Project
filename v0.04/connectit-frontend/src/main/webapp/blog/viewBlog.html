@@ -1,0 +1,62 @@
+<!-- Modal -->
+<div id="blogModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+	
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body" >
+        <p>{{ctrl.blogview.blogId}}</p>
+        <p>Blog Name:<h3>{{ctrl.blogview.blogName}}</h3></p>
+        <p><span ng-bind-html="ctrl.blogview.blogContent"></p>
+      </div>
+      <div ng-controller="BlogCommentController as ctrl">
+      <form ng-submit="ctrl.submit()" name="blogCommentForm" class="form-horizontal">
+      		<input type="hidden" ng-model="ctrl.blogComment.commentId" />
+      		<div class="row">
+                          <div class="form-group col-md-12">
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.blogComment.blogComment" id="bname" class="username form-control input-sm" placeholder="Post comment" />
+                              </div>
+                          </div>
+                      </div>
+             <div class="row">
+                          <div class="form-actions floatRight">
+                              <input type="submit"  value="post" class="btn btn-primary btn-sm">
+                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="blogForm.$pristine">Reset</button>
+                          </div>
+                      </div>
+      </form>
+      <button type="button" ng-click="ctrl.fetchAllBlogComments()" class="btn btn-warning btn-sm" >view comments</button>
+      <div class="tablecontainer">
+                  <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>Comments</th>
+                             <th>   </th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr ng-repeat="row in ctrl.blogComments">
+                              <td><span ng-bind="row.blogComment"></span>
+                              <span ng-bind="row.commentDate"></span>
+                              </td>
+                              <td>
+                              <button type="button" ng-click="ctrl.remove(row.commentId)" class="btn btn-danger custom-width">Delete</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+      
+
+      <div class="modal-footer">
+        <button type="button" ng-click="ctrl.refresh()" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+	      </div>
+  </div>
+</div>
