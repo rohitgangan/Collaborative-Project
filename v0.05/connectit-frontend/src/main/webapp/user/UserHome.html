@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div clas="container" ng-controller="UserController as ctrl">
+{{ctrl.userProfile.username}}<br>
+<h1>{{ctrl.userProfile.firstName}}
+ {{ctrl.userProfile.lastName}}</h1>
+
+<img alt="" src="resources/images/user/{{ctrl.userProfile.userId}}.jpg" height="100px" width="100px">
+
+<form name="userForm" ng-submit="ctrl.submitUser()">
+<input type="file" file-model="profileImage"/>
+<button type="submit" class="btn btn-lg btn-primary">Save</button>
+</form>
+
+</div>
+</body>
+</html>
