@@ -1,0 +1,68 @@
+<!-- Modal -->
+<div id="forumModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+    	<!-- Modal content-->
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<button type="button" class="close" data-dismiss="modal">&times;</button>
+        		<h4 class="modal-title">Modal Header</h4>
+      		</div>
+      		<div class="modal-body" >
+        		<p>{{ctrl.forumview.chatForumId}}</p>
+        		<p>Forum Name:<h3>{{ctrl.forumview.forumName}}</h3></p>
+        		<p><span ng-bind-html="ctrl.forumview.forumContent"></p>
+      		</div>
+      		<div ng-controller="ForumChatController as forumChatctrl">
+       			<div ng-controller="ForumMemberController as memberCtrl">
+       			<button type="button" ng-click="memberCtrl.memberExist()" class="btn btn-warning btn-sm" >View Members</button>
+		 		<div ng-if="isExist == true">
+      			<form name="chatForumForm" class="form-horizontal" ng-submit="forumChatctrl.submit()">
+      				<input type="hidden" ng-model="forumChatctrl.chatForum.chatForumId" />
+      				<div class="row">
+                        <div class="form-group col-md-12">
+                            <div class="col-md-7">
+                                <input type="text" ng-model="forumChatctrl.chatForum.chatContent" id="bname" class="username form-control input-sm" placeholder="your message" />
+                            </div>
+                        </div>
+					</div>
+             		<div class="row">
+                    	<div class="form-actions floatRight">
+                        	<input type="submit"  value="post" class="btn btn-primary btn-sm">
+                            <button type="button" ng-click="forumChatctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="chatForumForm.$pristine">Reset</button>
+                   		</div>
+                	</div>
+      			</form>
+       			</div>
+         
+      			<button type="button" ng-click="forumChatctrl.fetchAllForumChats()" class="btn btn-warning btn-sm" >view chats</button>
+      			<div class="tablecontainer">
+            		<table class="table table-hover">
+                		<thead>
+                    		<tr>
+                        		<th>Chats</th>
+                             	<th>   </th>
+                      		</tr>
+                		</thead>
+                    	<tbody>
+                  			<tr ng-repeat="row in forumChatctrl.chatForums">
+                      			<td><span ng-bind="row.chatContent"></span>
+                       			<!-- <span ng-bind="row.commentDate"></span> -->
+                        		</td>
+                        		<td>
+                   					<button type="button" ng-click="forumChatctrl.remove(row.chatForumId)" class="btn btn-danger custom-width">Delete</button>
+                     			</td>
+                        	</tr>
+                  		</tbody>
+            		</table>
+        		</div>   
+        		 <div ng-if="isExist == false">
+        		 <button type="button" ng-click="memberCtrl.submit()" class="btn btn-warning btn-sm" >Join Forum</button>
+        		 </div>
+      			<div class="modal-footer">
+        			<button type="button" ng-click="forumChatctrl.refresh()" class="btn btn-default" data-dismiss="modal">Close</button>
+      			</div>
+    		</div>   
+    	</div>
+    </div>
+  	</div>
+</div>
