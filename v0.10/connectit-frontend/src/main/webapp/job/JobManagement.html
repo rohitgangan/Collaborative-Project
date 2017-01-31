@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>  
+   
+    <style>
+      .username.ng-valid {
+          background-color: lightgreen;
+      }
+      .username.ng-dirty.ng-invalid-required {
+          background-color: red;
+      }
+      .username.ng-dirty.ng-invalid-minlength {
+          background-color: yellow;
+      }
+ 
+      .email.ng-valid {
+          background-color: lightgreen;
+      }
+      .email.ng-dirty.ng-invalid-required {
+          background-color: red;
+      }
+      .email.ng-dirty.ng-invalid-email {
+          background-color: yellow;
+      }
+ 
+    </style>
+    
+  </head>
+  <body class="ng-cloak">
+      <div class="generic-container" ng-controller="JobController as jobCtrl">
+          <div class="panel panel-default">
+              <div class="panel-heading"><span class="lead">Job Creation Form </span></div>
+              <div class="formcontainer">
+                  <form ng-submit="jobCtrl.submit()" name="jobForm" class="form-horizontal">
+                      <input type="hidden" ng-model="jobCtrl.job.jobId" />
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="bname">Job Title</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="jobCtrl.job.title" id="bname" class="username form-control input-sm" placeholder="Enter Job Title" required ng-minlength="3"/>
+                                  <div class="has-error" ng-show="jobForm.$dirty">
+                                      <span ng-show="jobForm.bname.$error.required">This is a required field</span>
+                                      <span ng-show="jobForm.bname.$error.minlength">Minimum length required is 3</span>
+                                      <span ng-show="jobForm.bname.$invalid">This field is invalid </span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                         
+                       
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="address">Qualification</label>
+                              
+              
+                              
+                               <div class="col-md-9">
+                                                  
+		      
+                                 
+                                  <input type="text" ng-model="jobCtrl.job.qualification" id="address" class="form-control input-sm" placeholder="Enter required qualification."/>
+                              </div> 
+                              
+                          </div>
+                      </div>
+ 						
+ 						<div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="address">Description</label>
+                               <div id="ng-app" class="ng-scope form-group col-md-12">
+        							<div class="form-group col-md-12 lighter">
+            							<div text-angular ng-model="jobCtrl.job.description" name="demo-editor" ta-text-editor-class="clearfix border-around container" ta-html-editor-class="border-around"></div>
+        </div>
+        <br>
+        <div class="form-group col-md-12 text-center lighter border-around">
+            <div class="lighter roboto">
+                <p ng-bind="jobCtrl.job.description" class="text-left text-med text-gray"></p>
+            </div>
+        </div>
+       
+    </div>
+                          </div>
+                      </div>
+ 						
+ 
+                      <div class="row">
+                          <div class="form-actions floatRight">
+                              <input type="submit"  value="{{!jobCtrl.job.jobId ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="jobForm.$invalid">
+                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="forumForm.$pristine">Reset Form</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+          <div class="panel panel-default">
+               
+              <div class="panel-heading"><span class="lead">List of Jobs </span></div>
+              <div class="tablecontainer">
+                  <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>ID.</th>
+                              <th>job Title</th>
+                              <th> Qualification</th>
+                              <th> Description</th>
+                              <th width="20%"></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr ng-repeat="row in jobCtrl.jobs">
+                              <td><span ng-bind="row.jobId"></span></td>
+                              <td><span ng-bind="row.title"></span></td>
+                              <td><span ng-bind="row.qualification"></span></td>
+                              <td><span ng-bind-html="row.description"></span></td>
+                              <td>
+                              <button type="button" ng-click="ctrl.edit(row.jobId)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(row.forumId)" class="btn btn-danger custom-width">Remove</button>
+                              <button type="button" ng-click="jobCtrl.viewJob(row.jobId)" class="btn btn-info" data-toggle="modal" data-target="#jobModal">View Details</button>
+                             
+                             
+                              <div ng-include="'job/viewJob.html'"></div>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+       
+     
+  </body>
+</html>

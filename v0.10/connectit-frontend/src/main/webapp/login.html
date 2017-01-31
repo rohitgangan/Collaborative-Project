@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div ng-controller="LoginController as ctrl">
+      <form method="POST" id="signin" name="form.loginForm" class="navbar-form navbar-right" role="form">
+                        <div class="input-group" ng-if="isLoggedIn != 'true'">
+                            <span class="input-group-addon yellow"><i class="glyphicon glyphicon-user "></i></span>
+                            <input id="email" type="text" class="form-control" ng-model="ctrl.credentials.username" name="username" value="" placeholder="Email Address">                                        
+                        </div>
+
+                        <div class="input-group" ng-if="isLoggedIn != 'true'">
+                            <span class="input-group-addon yellow"><i class="glyphicon glyphicon-lock yellow"></i></span>
+                            <input id="password" type="password" class="form-control" ng-model="ctrl.credentials.password" name="password" value="" placeholder="Password">                                        
+                        </div>
+						<div ng-if="isLoggedIn != 'true'">
+                        <button type="submit" class="btn btn-primary yellow" ng-click="ctrl.login()">Login</button>
+                         </div>
+                         <button type="submit" class="btn btn-primary yellow" ng-click="ctrl.logout()">Logout</button>
+                   </form>
+     </div>
+</body>
+</html>
