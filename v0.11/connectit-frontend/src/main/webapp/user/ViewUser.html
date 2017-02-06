@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div ng-controller="UserController as userCtrl">
+{{viewProfile.firstName+' '+viewProfile.lastName}}
+<div ng-controller="FriendController as friendCtrl">
+<input type="hidden" ng-model="friendCtrl.friend.friendTableId">
+<a ng-click="friendCtrl.sendFriendRequest(friend, viewProfile.userId)">Send Friend Request
+</a>
+</div>
+
+</div>
+</body>
+</html>

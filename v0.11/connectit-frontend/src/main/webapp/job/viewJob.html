@@ -1,0 +1,25 @@
+<!-- Modal -->
+<div id="jobModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+	
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body" >
+        <p>{{jobCtrl.jobview.jobId}}</p>
+        <p><h3>Title:{{jobCtrl.jobview.title}}</h3></p>
+        <p><h5>Qualification:{{jobCtrl.jobview.qualification}}</h5></p>
+        <p><span ng-bind-html="jobCtrl.jobview.description"></span></p>
+      </div>
+      
+      
+
+      <div class="modal-footer">
+        <button type="button" ng-click="jobCtrl.refresh()" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>  
+   
+    <style>
+      .username.ng-valid {
+          background-color: lightgreen;
+      }
+      .username.ng-dirty.ng-invalid-required {
+          background-color: red;
+      }
+      .username.ng-dirty.ng-invalid-minlength {
+          background-color: yellow;
+      }
+ 
+      .email.ng-valid {
+          background-color: lightgreen;
+      }
+      .email.ng-dirty.ng-invalid-required {
+          background-color: red;
+      }
+      .email.ng-dirty.ng-invalid-email {
+          background-color: yellow;
+      }
+ 
+    </style>
+    
+  </head>
+  <body class="ng-cloak">
+      <div class="generic-container" ng-controller="ForumController as ctrl">
+          <div class="panel panel-default">
+              <div class="panel-heading"><span class="lead">Forum Creation Form </span></div>
+              <div class="formcontainer">
+                  <form ng-submit="ctrl.submit()" name="forumForm" class="form-horizontal">
+                      <input type="hidden" ng-model="ctrl.forum.forumId" />
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="bname">Blog Name</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.forum.forumName" id="bname" class="username form-control input-sm" placeholder="Enter forum name" required ng-minlength="3"/>
+                                  <div class="has-error" ng-show="forumForm.$dirty">
+                                      <span ng-show="forumForm.bname.$error.required">This is a required field</span>
+                                      <span ng-show="forumForm.bname.$error.minlength">Minimum length required is 3</span>
+                                      <span ng-show="forumForm.bname.$invalid">This field is invalid </span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                         
+                       
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="address">Blog Content</label>
+                              
+              
+                              
+                               <div class="col-md-9">
+                                                  
+		      
+                                 
+                                  <input type="text" ng-bind="forumContent" ng-model="ctrl.forum.forumContent" id="address" class="form-control input-sm" placeholder="Enter forum Content."/>
+                              </div> 
+                              
+                          </div>
+                      </div>
+ 
+ 
+                      <div class="row">
+                          <div class="form-actions floatRight">
+                              <input type="submit"  value="{{!ctrl.forum.forumId ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="forumForm.$invalid">
+                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="forumForm.$pristine">Reset Form</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+          <div class="panel panel-default">
+               
+              <div class="panel-heading"><span class="lead">List of forums </span></div>
+              <div class="tablecontainer">
+                  <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>ID.</th>
+                              <th>forum Name</th>
+                              <th>forum Content</th>
+                              <th width="20%"></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr ng-repeat="row in ctrl.forums">
+                              <td><span ng-bind="row.forumId"></span></td>
+                              <td><span ng-bind="row.forumName"></span></td>
+                              <td><span ng-bind-html="row.forumContent"></span></td>
+                              <td>
+                              <button type="button" ng-click="ctrl.edit(row.forumId)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(row.forumId)" class="btn btn-danger custom-width">Remove</button>
+                              <button type="button" ng-click="ctrl.viewForum(row.forumId)" class="btn btn-success custom-width" data-toggle="modal" data-target="#forumModal">View Forum</button>
+                             
+                             
+                              <div ng-include="'forum/ViewForum.html'"></div>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+       
+     
+  </body>
+</html>

@@ -1,0 +1,75 @@
+
+   <div ng-controller="UserController as userCtrl">
+     
+	<form name="userForm" method="POST">
+	    <table>
+		<tr><td colspan="2">
+		  <div ng-if="userCtrl.flag != 'edit'">
+		     <h3> Add New User </h3> 
+		  </div>
+		  <div ng-if="userCtrl.flag == 'edit'">
+		     <h3> Update User for ID: {{ userCtrl.user.userId }} </h3> 
+		  </div> </td>
+		</tr>
+		<tr>
+		      <td>Username: </td> <td><input type="text" name="username" ng-model="userCtrl.user.username" required/> 
+         	      <span ng-show="userForm.username.$error.required" class="msg-val">Name is required.</span> </td>
+		</tr>
+		<tr>
+		      <td>Password: </td> <td> <input type="text" name="password" ng-model="userCtrl.user.password" required/> 
+	              <span ng-show="userForm.password.$error.required" class="msg-val">Password is required.</span> </td>
+		</tr>
+		<tr>
+		      <td>First Name: </td> <td> <input type="text" name="firstName" ng-model="userCtrl.user.firstName" required/> 
+	              <span ng-show="userForm.firstName.$error.required" class="msg-val">First Name is required.</span> </td>
+		</tr>
+		<tr>
+		      <td>Last Name: </td> <td> <input type="text" name="lastName" ng-model="userCtrl.user.lastName" required/> 
+	              <span ng-show="userForm.lastName.$error.required" class="msg-val">LastName is required.</span> </td>
+		</tr>
+		<tr>
+		      <td>Email Id: </td> <td> <input type="text" name="emailId" ng-model="userCtrl.user.emailId" required/> 
+	              <span ng-show="userForm.emailId.$error.required" class="msg-val">Email is required.</span> </td>
+		</tr>
+		<tr>
+			<td>I am </td><td><input type="radio" name="role" ng-model="userCtrl.user.role" value="Student"/>Student
+						  <input type="radio" name="role" ng-model="userCtrl.user.role" value="Alumni"/>Alumini
+				   		  <input type="radio" name="role" ng-model="userCtrl.user.role" value="Employee"/>Employee</td>
+		</tr>
+		
+		<tr>
+		     <td colspan="2"> <span ng-if="userCtrl.flag=='created'" class="msg-success">User successfully added.</span>
+		     <span ng-if="userCtrl.flag=='failed'" class="msg-val">User already exists.</span> </td>
+		</tr>
+	        <tr><td colspan="2">
+	            <div ng-if="userCtrl.flag != 'edit'">
+		       <input  type="submit" ng-click="userCtrl.addUser()" value="Add User"/> 
+		       <input type="button" ng-click="userCtrl.reset()" value="Reset"/>
+		    </div>
+		    <div ng-if="userCtrl.flag == 'edit'">
+		       <input  type="submit" ng-click="userCtrl.updateUserDetail()" value="Update User"/> 	
+			   <input type="button" ng-click="userCtrl.cancelUpdate()" value="Cancel"/>				   
+		    </div> </td>
+		</tr>
+		<tr>
+		     <td colspan="2"> <span ng-if="blogCtrl.flag=='deleted'" class="msg-success">Blog successfully deleted.</span>
+		</tr>
+	    </table>     
+	</form>
+         <table>
+	      <tr><th>ID </th> <th>Name</th> <th>Password</th></tr>
+	      <tr ng-repeat="row in userCtrl.users">
+	         <td><span ng-bind="row.userId"></span></td>
+	         <td><span ng-bind="row.username"></span></td>
+	         <td><span ng-bind="row.password"></span></td>
+	         <td>
+		    <input type="button" ng-click="userCtrl.deleteUser(row.userId)" value="Delete"/>
+		    <input type="button" ng-click="userCtrl.editUser(row.userId)" value="Edit"/>
+		    <span ng-if="userCtrl.flag=='updated' && row.userId==userCtrl.updatedId" class="msg-success">Blog successfully updated.</span> </td> 
+	      </tr>	
+	</table>
+	</div>
+       
+	
+ </body>
+</html> 
