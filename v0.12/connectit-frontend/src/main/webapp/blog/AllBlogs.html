@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body class="ng-cloak">
+	<div ng-controller="BlogController as blogCtrl">
+		<div ng-repeat="row in blogCtrl.blogs">
+			<h3>Blog Name:<span ng-bind="row.blogName"></span></h3>
+				<div ng-controller="BlogController as blogCtrl">
+				
+				
+			<button type="button" class="btn btn-success" ng-click="blogCtrl.viewBlog(row.blogId)" data-toggle="modal" data-target="#blogModal"">View</button>
+			<div ng-include="'blog/viewBlog.html'"></div>
+			<br>
+		</div>
+	</div>
+</body>
+</html>

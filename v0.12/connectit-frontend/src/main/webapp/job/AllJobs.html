@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Insert title here</title>
+</head>
+<body class="ng-cloak" >
+<div ng-controller="JobController as jobCtrl"> 
+
+                     <div ng-repeat="row in jobCtrl.jobs">
+                     	<p><h3><span ng-bind="row.title"></span></h3></p>
+                     	<p><h5>Qualification:<span ng-bind="row.qualification"></span></h5></p>
+                     
+                     	<input type="hidden" ng-model="jobCtrl.jobApplication.jobApplicationId">
+                     	<button type="button" class="btn btn-success" ng-click="jobCtrl.apply(jobCtrl.jobApplication,row.jobId)">Apply</button>
+ 						 
+ 						 <button type="button" ng-click="jobCtrl.viewJob(row.jobId)" class="btn btn-info" data-toggle="modal" data-target="#jobModal">View Details</button>
+                             
+                             
+                              <div ng-include="'job/viewJob.html'"></div>
+                     </div>
+        
+                  </div>
+</body>
+</html>
