@@ -1,0 +1,79 @@
+<!-- Modal -->
+<div id="forumModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+    	<!-- Modal content-->
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<button type="button" class="close" data-dismiss="modal">&times;</button>
+        		<h4 class="modal-title">Modal Header</h4>
+      		</div>
+      		<div class="modal-body" >
+      		 <div id="da-slider" class="da-slider">
+                <div class="triangle"></div>
+                <!-- mask elemet use for masking background image -->
+                <div class="mask"></div>
+                <div class="container">
+                <div class="da-slide">
+        		<p>{{forumCtrl.forumview.chatForumId}}</p>
+        		<p>Forum Name:<h3>{{forumCtrl.forumview.forumName}}</h3></p>
+        		<p><span ng-bind-html="forumCtrl.forumview.forumContent"></p>
+      		
+      		<div ng-controller="ForumChatController as forumChatctrl">
+       			<div ng-controller="ForumMemberController as memberCtrl">
+       			{{isExist}}<div ng-controller="UserController as userCtrl">
+       			<button type="button" ng-click="memberCtrl.loadList()" class="btn btn-warning btn-sm" >View Members</button>
+		 		<ul ng-repeat="row in memberCtrl.forumMembers">
+		 			<li>{{row.user.firstName}} {{row.user.lastName}}</li>
+		 		</ul>
+		 		<div>
+        		 <button ng-show="isExist != true" type="button" ng-click="memberCtrl.submit()" class="btn btn-warning btn-sm" ><span>Join Forum</span></button>
+		 		</div>
+		 		<div ng-repeat="row in memberCtrl.forumMembers" ng-if="row.userId == userCtrl.userProfile.userId">
+      			<form name="chatForumForm" class="form-horizontal" ng-submit="forumChatctrl.submit()">
+      				<input type="hidden" ng-model="forumChatctrl.chatForum.chatForumId" />
+      				<div class="row">
+                        <div class="form-group col-md-12">
+                            <div class="col-md-7">
+                                <input type="text" ng-model="forumChatctrl.chatForum.chatContent" id="bname" class="username form-control input-sm" placeholder="your message" />
+                            </div>
+                        </div>
+					</div>
+             		<div class="row">
+                    	<div class="form-actions ">
+                        	<input type="submit"  value="post" class="btn btn-primary btn-sm">
+                            <button type="button" ng-click="forumChatctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="chatForumForm.$pristine">Reset</button>
+                   		</div>
+                	</div>
+      			</form>
+       			</div>
+         </div>  </div>
+      			<button type="button" ng-click="forumChatctrl.fetchAllForumChats()" class="btn btn-warning btn-sm" >view chats</button>
+      			<div class="tablecontainer" ng-controller="UserController as userCtrl">
+            		<table class="table table-hover">
+                		<thead>
+                    		<tr>
+                        		<th>Chats</th>
+                             	<th>   </th>
+                      		</tr>
+                		</thead>
+                    	<tbody>
+                  			<tr ng-repeat="row in forumChatctrl.chatForums">
+                      			<td><span ng-bind="row.chatContent"></span>
+                       			<!-- <span ng-bind="row.commentDate"></span> -->
+                        		</td>
+                        		<td>
+                   					<button type="button" ng-show="row.userId == userCtrl.userProfile.userId" ng-click="forumChatctrl.remove(row.chatForumId)" class="btn btn-danger custom-width">Delete</button>
+                     			</td>
+                        	</tr>
+                  		</tbody>
+            		</table>
+        		</div>   
+        		 </div></div></div></div>
+      			<div class="modal-footer" ng-controller="ForumChatController as forumChatctrl">
+        			<button type="button" ng-click="forumChatctrl.refresh()" class="btn btn-default" data-dismiss="modal">Close</button>
+      			</div>
+    		 
+    	
+    </div>
+  	</div>
+</div>

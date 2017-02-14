@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body class="ng-cloak">
+	<div ng-controller="ForumController as forumCtrl">
+		<div ng-repeat="row in forumCtrl.forums">
+			<h3>Forum Name:<span ng-bind="row.forumName"></span></h3>
+				
+				
+				
+			<button type="button" class="btn btn-success" ng-click="forumCtrl.viewForum(row.forumId)" data-toggle="modal" data-target="#forumModal"">View Forum</button>
+			<div ng-include="'forum/ViewForum.html'"></div>
+			<br>
+		</div>
+</body>
+</html>

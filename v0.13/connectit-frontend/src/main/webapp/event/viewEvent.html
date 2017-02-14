@@ -1,0 +1,35 @@
+<!-- Modal -->
+<div id="eventModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+	
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Event Details</h4>
+      </div>
+      <div class="modal-body" >
+      <div id="da-slider" class="da-slider">
+                <div class="triangle"></div>
+                <!-- mask elemet use for masking background image -->
+                <div class="mask"></div>
+                <div class="container">
+                <div class="da-slide">
+        <p>{{eventCtrl.eventview.eventId}}</p>
+        <p><h3>{{eventCtrl.eventview.eventName}}</h3></p>
+        <p><span ng-bind-html="eventCtrl.eventview.eventDetails"></p>
+        <button type="button" ng-click="eventCtrl.list(eventCtrl.eventview.eventId)" class="btn btn-success yellow">View Members</button>
+     	<ul ng-repeat="row in eventCtrl.eventMembers">
+     	<li>{{row.user.firstName}} {{row.user.lastName}}</li>
+     	</ul>
+      </div>
+      </div></div></div>
+            
+
+      <div class="modal-footer">
+        <button type="button" ng-click="ctrl.refresh()" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    
+	      </div>
+  </div>
+</div>

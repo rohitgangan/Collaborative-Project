@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<div id="da-slider" class="da-slider" ng-controller="UserController as userCtrl">
+        	<div class="triangle"></div>
+                <!-- mask elemet use for masking background image -->
+                <div class="mask"></div>
+                <div class="container">
+                	
+				 <div>
+    			 <div class="card hovercard">
+        			<div class="card-background">
+            			<img class="card-bkimg" alt="" src="resources/images/user/{{viewProfile.userId}}.jpg">
+        			
+        			</div>
+        			<div class="useravatar">
+            			<img alt="" src="resources/images/user/{{viewProfile.userId}}.jpg">
+            			
+        			</div>
+        			
+        			<div class="card-info"> 
+        			
+        			<span class="card-title">{{viewProfile.firstName}} {{viewProfile.lastName}}</span>
+
+        			</div>
+    			</div>
+    			<div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+        			<div class="btn-group" role="group">
+            			<button type="button" id="stars" class="btn btn-primary yellow" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                		<div class="hidden-xs">User Profile</div>
+            			</button>
+        			</div>
+        			<div class="btn-group" role="group">
+            			<button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                		<div class="hidden-xs">User Blogs</div>
+            			</button>
+        			</div>
+        			<div class="btn-group" role="group">
+            			<button type="button" id="favorites" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                		<div class="hidden-xs">User Forums</div>
+            			</button>
+        			</div>
+        			<div class="btn-group" role="group">
+            			<button type="button" id="following" class="btn btn-default" href="#tab4" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                		<div class="hidden-xs">Friends</div>
+            			</button>
+        			</div>
+   				 </div>
+   				 
+   				
+
+       			 <div class="well">
+      				<div class="tab-content">
+        				<div class="tab-pane fade in active" id="tab1">
+        					<div ng-controller="FriendController as friendCtrl">
+								<input type="hidden" ng-model="friendCtrl.friend.friendTableId">
+								<a ng-click="friendCtrl.sendFriendRequest(friend, viewProfile.userId)"><span  ng-repeat="row in friendCtrl.allFriends" ng-if="(userCtrl.userProfile.userId != row.userId && viewProfile.userId !=row.friendId) || (userCtrl.userProfile.userId != row.friendId && viewProfile.userId !=row.userId) &&  $index == 1">Send Friend Request</span>
+									</a>
+									<span  ng-repeat="row in friendCtrl.friends" ng-show="((userCtrl.userProfile.userId == row.userId && viewProfile.userId ==row.friendId) || (userCtrl.userProfile.userId == row.friendId && viewProfile.userId ==row.userId))&&(row.status=='A')"><b>Friends</b></span>
+								<span  ng-repeat="row in friendCtrl.allFriends" ng-show="((userCtrl.userProfile.userId == row.userId && viewProfile.userId ==row.friendId) || (userCtrl.userProfile.userId == row.friendId && viewProfile.userId ==row.userId))&&(row.status=='N')"><b>Friend Request Sent</b></span>
+								
+								</div>
+          					Name: {{viewProfile.firstName}} {{viewProfile.lastName}}<br>
+          					Qualification: {{viewProfile.qualification}}
+          				
+        				</div>
+        				<div class="tab-pane fade in" id="tab2" ng-controller="BlogController as blogCtrl">
+          					<ul ng-repeat="u in viewProfile.blog">
+								<li > <a ng-click="blogCtrl.viewBlog(u.blogId)" data-toggle="modal" data-target="#blogModal">{{u.blogName}}</a></li>
+								<div ng-include="'blog/viewBlog.html'"></div>	
+							</ul>
+        				</div>
+        				<div class="tab-pane fade in" id="tab3" >
+          					
+        				</div>
+        				<div class="tab-pane fade in" id="tab4" ng-controller="FriendController as friendCtrl">
+          					<ul>
+          						<li ng-repeat="f in friendCtrl.friendRequests">{{f.userId}} {{f.user.firstName}} {{f.user.lastName}}<a ng-click="friendCtrl.acceptFriendRequest(f.userId)">Accept Friend Request</a><a ng-click="friendCtrl.rejectFriendRequest(f.userId)">Reject Friend Request</a></li>
+          					</ul>
+          					<div ng-Controller="UserController as userCtrl">
+          					<ul ng-repeat="row in friendCtrl.friends">
+          						<li ng-show="viewProfile.userId != row.user.userId">{{userProfile.userId}}  {{row.user.firstName}} {{row.user.lastName}}</li>
+          						<li ng-show="viewProfile.userId != row.userFriend.userId">{{row.userFriend.firstName}} {{row.userFriend.lastName}}</li>
+          					</ul>
+          					</div>
+        				</div>
+      				</div>
+    			</div>
+    
+    			</div>
+			</div>
+		</div>
+				
+				
+<script>
+$(document).ready(function() {
+	$(".btn-pref .btn").click(function () {
+	    $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+	    // $(".tab").addClass("active"); // instead of this do the below 
+	    $(this).removeClass("btn-default").addClass("btn-primary");   
+	});
+	});
+</script>
+ <script type="text/ng-template" id="itemTpl.html">
+<div ng-controller="UserController as userCtrl">    
+<a tabindex="-1" ng-click="userCtrl.getUserById(match.model.userId)">
+
+<img alt="" src="resources/images/user/{{match.model.userId}}.jpg" height="20px" width="20px"/>      
+<span>{{match.model.firstName+' '+match.model.lastName}}</span>
+      
+    </a>
+  </script>
+</body>
+
+</html>

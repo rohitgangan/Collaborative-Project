@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body class="ng-cloak">
+
+	<div class="container" ng-controller="EventController as eventCtrl"> 
+
+                     <div class="row" ng-repeat="row in eventCtrl.events">
+                     		
+                     		<div class="col-sm-12 col-md-12">
+                     		<p>Event Name:<span ng-bind="row.eventName"></span></p>
+                     		</div>
+                     		<div class="col-sm-4 col-md-4">
+                     		<button type="button" ng-click="eventCtrl.viewEvent(row.eventId)" class="btn btn-success yellow" data-toggle="modal" data-target="#eventModal">View Details</button>
+                             </div>
+                             
+                              <div ng-include="'event/viewEvent.html'"></div>
+ 						 <div class="col-sm-4 col-md-4">
+ 						 <form>
+ 						 <input type="hidden" ng-model="eventCtrl.member.eventMemberId"> 
+ 						 <button type="button" ng-click="eventCtrl.add(row.eventId)" class="btn btn-info">Join Event</button>
+                     	</form>
+                     </div>
+                     <br>
+                     </div>
+                     
+                     </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body class="ng-cloak">
+<div ng-controller="JobController as jobCtrl"> 
+
+                     <div ng-repeat="row in jobCtrl.jobApplications">
+                     		
+                     		<p>Applicant Name:<span ng-bind="row.user.firstName"></span> <span ng-bind="row.user.lastName"></span></p>
+                     		<p>Job Title:<span ng-bind="row.job.title"></span></p>
+                     		<button type="button" class="btn btn-success" ng-click="jobCtrl.acceptJobApplication(row.userId,row.jobId)">Approve</button>
+ 						 
+ 						 <button type="button" ng-click="jobCtrl.rejectJobApplication(row.userId,row.jobId)" class="btn btn-info">Reject</button>
+                     <br>
+                     </div>
+                     
+                     </div>
+</body>
+</html>
